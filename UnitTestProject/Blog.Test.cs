@@ -2,18 +2,24 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HemtentaTdd2017.blog;
 using HemtentaTdd2017;
-using Moq;
 
 namespace UnitTestProject
 {
     [TestClass]
     public class UnitTest1
     {
+        Blog blog;
+        User user;
+
+        public UnitTest1()
+        {
+            blog = new Blog();
+            user = new User("some user");
+        }
+
         [TestMethod]
         public void LoginUser_Test()
         {
-            Blog blog = new Blog();
-            User user = new User("some name");
             blog.LoginUser(user);
             Assert.AreEqual(true, blog.UserIsLoggedIn, "Exception");
         }
@@ -21,8 +27,6 @@ namespace UnitTestProject
         [TestMethod]
         public void Logout_Test()
         {
-            User user = new User("testUser");
-            Blog blog = new Blog();
             blog.LogoutUser(user);
             Assert.AreEqual(false, blog.UserIsLoggedIn);
         }
@@ -31,8 +35,7 @@ namespace UnitTestProject
         [ExpectedException(typeof(ArgumentException))]
         public void LogoutUser_ThrowException_InvalidUser_Test()
         {
-            User user = new User(""); //set an invalid user
-            Blog blog = new Blog();
+            user = new User(""); //set an invalid user
             blog.LogoutUser(user);
 
             bool expected = true;
@@ -44,7 +47,6 @@ namespace UnitTestProject
         [TestMethod]
         public void PublishPage_ValidPage_Test()
         {
-            Blog blog = new Blog();
             //here we set valid values to page properties making the page valid
             Page page = new Page() { Title = "Title", Content = "Content" };
             blog.UserIsLoggedIn = true;
@@ -58,7 +60,6 @@ namespace UnitTestProject
         [TestMethod]
         public void PublishPage_UserLoginStatus_Test()
         {
-            Blog blog = new Blog();
             Page page = new Page() { Title = "title", Content = "content" };
             //here we set user not logged in
             blog.UserIsLoggedIn = false;
@@ -74,7 +75,6 @@ namespace UnitTestProject
         public void PublishPage_InvalidPage_GivesException_Test()
         {
             Page page = new Page() { Title = "", Content = "content" };
-            Blog blog = new Blog();
             blog.UserIsLoggedIn = true;
 
             bool expected = false;
@@ -86,8 +86,7 @@ namespace UnitTestProject
         [TestMethod]
         public void SendEmail_InvalidParameter_Test()
         {
-            Blog blog = new Blog();
-            string address = "";
+            string address = ""; //invalid
             string caption = "n";
             string body = "n";
             blog.UserIsLoggedIn = true;
@@ -101,7 +100,6 @@ namespace UnitTestProject
         [TestMethod]
         public void SendMail_UserLoggedOut_Test()
         {
-            Blog blog = new Blog();
             blog.UserIsLoggedIn = true;
             string address = "n";
             string caption = "n";
@@ -111,8 +109,6 @@ namespace UnitTestProject
             int actual = blog.SendEmail(address, caption, body);
 
             Assert.AreEqual(expected, actual, "User not logged in");
-        }
-
-        
+        }        
     }
 }

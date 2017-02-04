@@ -3,8 +3,6 @@ using NUnit.Framework;
 using HemtentaTdd2017.webshop;
 using HemtentaTdd2017;
 using Moq;
-using static HemtentaTdd2017.Bank;
-using NUnit.Framework.Constraints;
 
 namespace UnitTestProject
 {
@@ -30,21 +28,37 @@ namespace UnitTestProject
     In IBASKET's AddProduct(Product p, int amount) & RemoveProduct(Product p, int amount)
     amount has domain integer between -2147483648 och +2147483647 &
     p has a domain of type Product or null
-    TotalCost property has a domain of a positive number. */
+    TotalCost property has a domain of a positive number. 
+    
+    PLS NOTE: 
+    Below mention 3 tests needs to run individually to see them passing. Some unknown error.
+    RemoveProduct_ValidInputs_Test()
+    AddProduct_InvalidInput_Exception_Test()
+    AddProduct_ValidrRoduct_Test()
+         */
 
     [TestFixture]
     public class UnitTest3
     {
+        IBasket basket;
+        Product product;
+        int quantity = 5;
+
+        public UnitTest3()
+        {
+            basket = new Basket();
+            product = new Product() { Price = 100 };
+        }
+
+
         [TestCase]
         public void AddProduct_ValidProduct_Test()
         {
-            IBasket basket = new Basket();
-            Product product = new Product { Price = 100}; //valid product
-            int quantity = 2; //valid quantity
+            //valid quantity
             basket.AddProduct(product, quantity);
 
             decimal actual = basket.TotalCost;
-            decimal expected = 200;
+            decimal expected = 500;
 
             Assert.AreEqual(expected, actual);
         }
@@ -52,22 +66,16 @@ namespace UnitTestProject
         [TestCase]
         public void AddProduct_InvalidInput_Exception_Test()
         {
-            IBasket basket = new Basket();
-            Product p = new Product() { Price = 100 };
-            int quantity = -5; //setting invalid quantity
-
-            Assert.Throws<IllegalInputException>(() => basket.AddProduct(p, quantity));
+            //setting invalid quantity
+            quantity = -5;
+            Assert.Throws<IllegalInputException>(() => basket.AddProduct(product, quantity));
         }
 
         [TestCase]
         public void RemoveProduct_Partly_Test()
         {
-            IBasket basket = new Basket();
-            Product p = new Product() { Price = 100 };
-            int quantity = 5;
-
-            basket.AddProduct(p, quantity);
-            basket.RemoveProduct(p, quantity - 1);
+            basket.AddProduct(product, quantity);
+            basket.RemoveProduct(product, quantity -1);
 
             decimal expected = 100;
             decimal actual = basket.TotalCost;
@@ -78,9 +86,8 @@ namespace UnitTestProject
         [TestCase]
         public void RemoveProduct_ValidInputs_Test()
         {
-            IBasket basket = new Basket();
-            Product p = new Product() {Price = 100 };
-            //int quantity = 5;
+            basket.AddProduct(product, quantity);
+            basket.RemoveProduct(product, quantity);
 
             decimal actual = basket.TotalCost;
             decimal expected = 0;
@@ -92,15 +99,12 @@ namespace UnitTestProject
         public void Checkout_InSufficientFunds_Test()
         {
             IWebshop webshop = new Webshop();
-            IBasket basket = new Basket();
-            Product p = new Product() { Price = 100 };
-            int qty = 5;
-
-            basket.AddProduct(p, qty);
             Mock<IBilling> mb = new Mock<IBilling>();
-            mb.Setup(x => x.Balance).Returns(100); //setting less balance than totalcost
 
+            basket.AddProduct(product, 5);
+
+            //setting less balance than totalcost
+            mb.Setup(x => x.Balance).Returns(100); 
         }
-
     }
 }
