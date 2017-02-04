@@ -1,0 +1,22 @@
+﻿Förklara med egna ord vad "red, green, refactor" innebär och hur du använt det i kursen.
+
+ Red Green and Refactor are the three basic steps to show how Test Driven Development should takes place.
+ Red represents that we should start writing a test that fails. We write exactly that much code that so that
+ test fails.
+
+ Next stage in TDD, is to write exact so much code so that the test above passes. Just writing the implementation
+ code and nothing more so that test becomes green.
+
+ Base for refactoring is that we should get all our tests green, i.e. they should pass. Here is the security that
+ if you change or alter your code in a class the test will always pass. Next in refactoring includes that we fix 
+ all the issues. If there are some duplicate codes in test, we should fix these and make the code more clean.
+ Refactoring involves basically makes the code clean, minimum but readable thereby giving the results always Pass.
+
+ And then you start again the process from writing a fail test.
+
+ In this project, i have used the same principle starting by writing a failed/short test, moving further 
+ to making the test pass which gave me a lot of unnecessary lines of repetitive code which i clean in the
+ end by refactoring it. I used to declare objects of the classes in every test method which i refactored in
+ the end by using constructor and declaring the common objects in the test class itself instead of declaring them
+ in every method.
+
