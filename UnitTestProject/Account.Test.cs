@@ -60,5 +60,25 @@ namespace UnitTestProject
             
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(IllegalAmountException))]
+        public void Deposit_ILLegalAmount_Test()
+        {
+            //setting illegal amount to check ILLegalAmountException
+            account.Deposit(-10); 
+            Assert.AreEqual(100, account.Amount);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(OperationNotPermittedException))]
+        public void Transfer_InvalidAccount_Test()
+        {
+            //sending legal amount to invalid account to check 
+            //OperationNotPermittedException
+            account.Deposit(100);
+            account.TransferFunds(null, 100);
+        }
+
     }
 }
