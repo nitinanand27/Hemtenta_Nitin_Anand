@@ -16,9 +16,8 @@ namespace UnitTestProject
     Yes, since i have control product and quantity is one statement
     I chose to throw ILLEGALINPUT exception incase any of the input
     entered is invalid.
-    Whereas I chose to import INSUFFICIENTFUNDS exception incase user's
+    Whereas I added LOWFUNDSEXCEPTION incase user's
     shopping cost exceeds balance amount in billing.
-
 
     Vilka är domänerna för IWebshop och IBasket?
     IWEBSHOP
@@ -31,36 +30,51 @@ namespace UnitTestProject
     TotalCost property has a domain of a positive number. 
     
     PLS NOTE: 
-    Below mention 3 tests needs to run individually to see them passing. Some unknown error.
+    Below mention 4 tests needs to run individually to see them passing. Some unknown error.
+
     RemoveProduct_ValidInputs_Test()
-    AddProduct_InvalidInput_Exception_Test()
-    AddProduct_ValidrRoduct_Test()
+    AddProduct_ValidProductQuantity_Test()
+    Checkout_NullBasket_Exception_Test()
+    RemoveProduct_Partly_Test()
          */
 
     [TestFixture]
     public class UnitTest3
     {
-        IBasket basket;
         Product product;
+        IBasket basket;        
         int quantity = 5;
+        IWebshop webshop;
+        Mock<IBilling> mbill;
 
         public UnitTest3()
         {
             basket = new Basket();
+            webshop = new Webshop(basket);
+            mbill = new Mock<IBilling>();
             product = new Product() { Price = 100 };
         }
 
+        //Testing Basket Class
 
         [TestCase]
-        public void AddProduct_ValidProduct_Test()
+        public void AddProduct_ValidProductQuantity_Test()
         {
-            //valid quantity
+            //valid quantity & valid product as declared above
             basket.AddProduct(product, quantity);
 
             decimal actual = basket.TotalCost;
             decimal expected = 500;
 
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase]
+        public void AddProduct_InvalidProduct_ILLegalInputException_Test()
+        {
+            //adding invalid product
+            Assert.Throws<IllegalInputException>(() => basket.AddProduct
+            (null, quantity));
         }
 
         [TestCase]
@@ -75,9 +89,9 @@ namespace UnitTestProject
         public void RemoveProduct_Partly_Test()
         {
             basket.AddProduct(product, quantity);
-            basket.RemoveProduct(product, quantity -1);
+            basket.RemoveProduct(product, quantity -2);
 
-            decimal expected = 100;
+            decimal expected = 200;
             decimal actual = basket.TotalCost;
 
             Assert.AreEqual(expected, actual);
@@ -96,15 +110,42 @@ namespace UnitTestProject
         }
 
         [TestCase]
-        public void Checkout_InSufficientFunds_Test()
+        public void Remove_InvalidProduct_Test()
         {
-            IWebshop webshop = new Webshop();
-            Mock<IBilling> mb = new Mock<IBilling>();
-
-            basket.AddProduct(product, 5);
-
-            //setting less balance than totalcost
-            mb.Setup(x => x.Balance).Returns(100); 
+           Assert.Throws<IllegalInputException>(() => basket.RemoveProduct(null, quantity));
         }
+        
+        // Webshop tests
+
+        [TestCase]
+        public void Checkout_LowFundsException_Test()
+        {
+            basket.AddProduct(product, 10);
+            //setting less balance than totalcost
+            mbill.Setup(x => x.Balance).Returns(basket.TotalCost -1);
+
+            Assert.Throws<LowFundsException>(() => webshop.Checkout(mbill.Object)); 
+        }
+
+        [TestCase]
+        public void Checkout_Pay_Success_Test()
+        {
+            basket.AddProduct(product, 10);
+            mbill.SetupGet(x => x.Balance).Returns(basket.TotalCost);
+            webshop.Checkout(mbill.Object);
+
+            mbill.Verify(x => x.Pay(basket.TotalCost), Times.Once);
+        }
+
+        [TestCase]
+        public void Checkout_NullBasket_Exception_Test()
+        {
+            //making the basket empty before checkout
+            webshop.Basket.AddProduct(product, 1);
+            webshop.Basket.RemoveProduct(product, 1);
+
+            Assert.Throws<NullBasketException>(() => webshop.Checkout(mbill.Object));
+        }
+
     }
 }

@@ -37,11 +37,8 @@ C:\Users\Studerande\Documents\GitHub\Hemtenta_Nitin_Anand\UnitTestProject\bin\De
 C:\Users\Studerande\Documents\GitHub\Hemtenta_Nitin_Anand\UnitTestProject\bin\Debug\Moq.xml
 C:\Users\Studerande\Documents\GitHub\Hemtenta_Nitin_Anand\UnitTestProject\bin\Debug\nunit.framework.xml
 C:\Users\Studerande\Documents\GitHub\Hemtenta_Nitin_Anand\UnitTestProject\bin\Debug\xunit.abstractions.xml
-C:\Users\Studerande\Documents\GitHub\Hemtenta_Nitin_Anand\UnitTestProject\bin\Debug\xunit.assert.pdb
 C:\Users\Studerande\Documents\GitHub\Hemtenta_Nitin_Anand\UnitTestProject\bin\Debug\xunit.assert.xml
-C:\Users\Studerande\Documents\GitHub\Hemtenta_Nitin_Anand\UnitTestProject\bin\Debug\xunit.core.pdb
 C:\Users\Studerande\Documents\GitHub\Hemtenta_Nitin_Anand\UnitTestProject\bin\Debug\xunit.core.xml
-C:\Users\Studerande\Documents\GitHub\Hemtenta_Nitin_Anand\UnitTestProject\bin\Debug\xunit.execution.desktop.pdb
 C:\Users\Studerande\Documents\GitHub\Hemtenta_Nitin_Anand\UnitTestProject\bin\Debug\xunit.execution.desktop.xml
 C:\Users\Studerande\Documents\GitHub\Hemtenta_Nitin_Anand\UnitTestProject\obj\Debug\UnitTestProject.csprojResolveAssemblyReference.cache
 C:\Users\Studerande\Documents\GitHub\Hemtenta_Nitin_Anand\UnitTestProject\obj\Debug\UnitTestProject.dll

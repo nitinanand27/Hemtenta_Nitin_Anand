@@ -57,6 +57,8 @@
     <Compile Include="webshop\Basket.cs" />
     <Compile Include="webshop\CartItem.cs" />
     <Compile Include="webshop\IllegalInputException.cs" />
+    <Compile Include="webshop\LowFundsException.cs" />
+    <Compile Include="webshop\NullBasketException.cs" />
     <Compile Include="webshop\Webshop.cs" />
   </ItemGroup>
   <ItemGroup>

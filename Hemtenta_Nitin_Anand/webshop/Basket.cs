@@ -9,20 +9,17 @@ namespace HemtentaTdd2017.webshop
 {
     public class Basket : IBasket
     {
-        //List<Product> productsInBasket;
-
         /// <summary>
         /// Cart item is the general model in a webshop representing
         /// an item in a list of selected products in a shopping cart.
         /// I have created this class with necessary properties.
         /// </summary>
-        
         List<CartItem> cartItems;
-
         public Basket()
         {
             cartItems = new List<CartItem>();
         }
+
         public decimal TotalCost
         {
             get
@@ -41,7 +38,7 @@ namespace HemtentaTdd2017.webshop
                     Quantity = amount
                 });
             }
-            else if (p == null || amount < 0)        
+            else if (p == null || amount < 0)
             {
                 throw new IllegalInputException("Invalid input");
             }
@@ -52,9 +49,11 @@ namespace HemtentaTdd2017.webshop
             if (p != null && amount > 0)
             {
                 //extract cart item to remove
-                var itemToRemove = cartItems.Where(x => x.Product.Price == p.Price).First();
+                var itemToRemove = cartItems.Where
+                    (x => x.Product.Price == p.Price).First();
 
-                //checks if extracted item's count in cart is more than desired to remove
+                //checks if extracted item's count in cart is more 
+                //than desired to remove
                 if (itemToRemove.Quantity > amount)
                 {
                     itemToRemove.Quantity -= amount;
@@ -64,13 +63,12 @@ namespace HemtentaTdd2017.webshop
                     cartItems.Remove(itemToRemove);
                 }
             }
-
+      
             else
             {
                 throw new IllegalInputException("Invalid input");
             }
 
-            
         }
     }
 }

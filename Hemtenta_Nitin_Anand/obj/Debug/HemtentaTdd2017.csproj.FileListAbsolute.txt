@@ -4,8 +4,8 @@ C:\Users\Studerande\Documents\Visual Studio 2017\TDD-Projects\Hemtenta_Nitin_Ana
 C:\Users\Studerande\Documents\Visual Studio 2017\TDD-Projects\Hemtenta_Nitin_Anand\Hemtenta_Nitin_Anand\obj\Debug\Hemtenta_Nitin_Anand.exe
 C:\Users\Studerande\Documents\Visual Studio 2017\TDD-Projects\Hemtenta_Nitin_Anand\Hemtenta_Nitin_Anand\obj\Debug\Hemtenta_Nitin_Anand.pdb
 C:\Users\Studerande\Documents\GitHub\Hemtenta_Nitin_Anand\Hemtenta_Nitin_Anand\bin\Debug\Hemtenta_Nitin_Anand.exe.config
-C:\Users\Studerande\Documents\GitHub\Hemtenta_Nitin_Anand\Hemtenta_Nitin_Anand\obj\Debug\Hemtenta_Nitin_Anand.exe
-C:\Users\Studerande\Documents\GitHub\Hemtenta_Nitin_Anand\Hemtenta_Nitin_Anand\obj\Debug\Hemtenta_Nitin_Anand.pdb
 C:\Users\Studerande\Documents\GitHub\Hemtenta_Nitin_Anand\Hemtenta_Nitin_Anand\bin\Debug\Hemtenta_Nitin_Anand.exe
 C:\Users\Studerande\Documents\GitHub\Hemtenta_Nitin_Anand\Hemtenta_Nitin_Anand\bin\Debug\Hemtenta_Nitin_Anand.pdb
 C:\Users\Studerande\Documents\GitHub\Hemtenta_Nitin_Anand\Hemtenta_Nitin_Anand\obj\Debug\HemtentaTdd2017.csprojResolveAssemblyReference.cache
+C:\Users\Studerande\Documents\GitHub\Hemtenta_Nitin_Anand\Hemtenta_Nitin_Anand\obj\Debug\Hemtenta_Nitin_Anand.exe
+C:\Users\Studerande\Documents\GitHub\Hemtenta_Nitin_Anand\Hemtenta_Nitin_Anand\obj\Debug\Hemtenta_Nitin_Anand.pdb

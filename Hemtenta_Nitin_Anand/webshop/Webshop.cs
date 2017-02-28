@@ -9,25 +9,37 @@ namespace HemtentaTdd2017.webshop
 {
     public class Webshop : IWebshop
     {
+        IBasket ibasket;
+
+        public Webshop(IBasket basket)
+        {
+            ibasket = basket;
+        }
         public IBasket Basket
         {
             get
             {
-                return new Basket();
+                return ibasket;
             }
         }
-
         public void Checkout(IBilling billing)
         {
-            IBasket basket = new Basket();
-
-            if (basket.TotalCost > billing.Balance)
+            if (ibasket.TotalCost > billing.Balance)
             {
-                throw new InsufficientFundsException("Insufficient funds. Remove items from basket");
+                throw new LowFundsException("Insufficient funds. Remove items from basket");
             }
 
-            decimal cost = basket.TotalCost;
-            billing.Pay(cost);            
+            if(Basket.TotalCost == 0)
+            {
+                throw new NullBasketException("Oops, Basket is empty");
+            }
+
+            decimal cost = ibasket.TotalCost;
+            billing.Pay(cost);
         }
+
+        
+
+      
     }
 }
