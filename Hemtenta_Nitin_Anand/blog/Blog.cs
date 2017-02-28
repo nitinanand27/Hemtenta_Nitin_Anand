@@ -8,20 +8,24 @@ namespace HemtentaTdd2017.blog
 {
     public class Blog : IBlog
     {
-        //private IAuthenticator authenticator;
-        //public Blog(IAuthenticator authenticator)
-        //{
-        //    this.authenticator = authenticator;
-        //}
+        private IAuthenticator authenticator;
+        public Blog(IAuthenticator authenticator)
+        {
+            this.authenticator = authenticator;
+        }
         public void LoginUser(User u)
         {
             if (String.IsNullOrEmpty(u.Name) || String.IsNullOrEmpty(u.Password))
             {
                 throw new ArgumentException("Username can't be empty");
             }
-            UserIsLoggedIn = true;
+            User user = authenticator.GetUserFromDatabase(u.Name);
+            if (user.Password == u.Password)
+            {
+                u = user;
+                UserIsLoggedIn = true;
+            }
         }
-
         public bool UserIsLoggedIn { get; set; }
 
         public void LogoutUser(User u)
